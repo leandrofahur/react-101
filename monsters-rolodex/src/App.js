@@ -8,29 +8,32 @@ class App extends Component {
       monsters: [],
       searchField: '',
     };
-    // console.log('Constructor');
   }
 
   componentDidMount() {
-    // console.log('componentDidMount');
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => response.json())
       .then((users) =>
-        this.setState(
-          () => {
-            return { monsters: users };
-          },
-          () => {
-            // console.log(this.state);
-          }
-        )
+        this.setState(() => {
+          return { monsters: users };
+        })
       );
   }
 
+  onSearchChange = (event) => {
+    const searchField = event.target.value.toLowerCase();
+
+    this.setState(() => {
+      return { searchField };
+    });
+  };
+
   render() {
-    // console.log('render');
-    const filteredMonsters = this.state.monsters.filter((monster) => {
-      return monster.name.toLowerCase().includes(this.state.searchField);
+    const { monsters, searchField } = this.state;
+    const { onSearchChange } = this;
+
+    const filteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLowerCase().includes(searchField);
     });
 
     return (
@@ -39,17 +42,7 @@ class App extends Component {
           placeholder='search monsters'
           className='search-box'
           type='search'
-          onChange={(event) => {
-            const searchField = event.target.value.toLowerCase();
-
-            this.setState(
-              () => {
-                return { searchField };
-              },
-              () =>
-                console.log({ monsters: this.state.monsters, filteredMonsters })
-            );
-          }}
+          onChange={onSearchChange}
         />
         {filteredMonsters.map((monster, index) => {
           return (
