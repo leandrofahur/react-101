@@ -1,29 +1,36 @@
 import { initializeApp } from 'firebase/app';
 import {
-  createUserWithEmailAndPassword,
   getAuth,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
   signInWithRedirect,
+  signInWithPopup,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+} from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDswvSdjZELArnd-xa3fJOzgncbA_bAjog',
-  authDomain: 'crwn-clothing-db-310a7.firebaseapp.com',
-  projectId: 'crwn-clothing-db-310a7',
-  storageBucket: 'crwn-clothing-db-310a7.appspot.com',
-  messagingSenderId: '492743802976',
-  appId: '1:492743802976:web:681d2546c33c0c5f414305',
+  apiKey: 'AIzaSyDDU4V-_QV3M8GyhC9SVieRTDM4dbiT0Yk',
+  authDomain: 'crwn-clothing-db-98d4d.firebaseapp.com',
+  projectId: 'crwn-clothing-db-98d4d',
+  storageBucket: 'crwn-clothing-db-98d4d.appspot.com',
+  messagingSenderId: '626766232035',
+  appId: '1:626766232035:web:506621582dab103a4d08d6',
 };
 
-// eslint-disable-next-line no-unused-vars
 const firebaseApp = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
+
 googleProvider.setCustomParameters({
   prompt: 'select_account',
 });
@@ -36,15 +43,30 @@ export const signInWithGoogleRedirect = () =>
 
 export const db = getFirestore();
 
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const batch = writeBatch(db);
+  const collectionRef = collection(db, collectionKey);
+  
+  objectsToAdd.forEach((object) => {
+     const docRef = doc(collectionRef, object.title.toLowerCase());
+     batch.set(docRef, object);
+  });
+
+  await batch.commit();
+  console.log('done');
+};
+
 export const createUserDocumentFromAuth = async (
   userAuth,
-  additionalInformation = { displayName: '' }
+  additionalInformation = {}
 ) => {
-  if (!userAuth) {
-    return;
-  }
+  if (!userAuth) return;
 
   const userDocRef = doc(db, 'users', userAuth.uid);
+
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
@@ -59,7 +81,7 @@ export const createUserDocumentFromAuth = async (
         ...additionalInformation,
       });
     } catch (error) {
-      console.log('Error creating user the user document', error.message);
+      console.log('error creating the user', error.message);
     }
   }
 
@@ -67,17 +89,13 @@ export const createUserDocumentFromAuth = async (
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
-  if (!email || !password) {
-    return;
-  }
+  if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-  if (!email || !password) {
-    return;
-  }
+  if (!email || !password) return;
 
   return await signInWithEmailAndPassword(auth, email, password);
 };
