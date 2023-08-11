@@ -1,13 +1,24 @@
-import BookCreate from "components/BookCreate/BookCreate";
-import BookEdit from "components/BookEdit/BookEdit";
-import BookList from "components/BookList/BookList";
+import { useState } from "react";
+import BookCreate from "./components/BookCreate/BookCreate";
 
 function App() {
+  const [books, setBooks] = useState([]);
+  console.log(books);
+
+  const handleCreateBook = (title) => {
+    const newBook = {
+      id: Math.random(),
+      title,
+    };
+
+    const newBooks = [...books, newBook];
+
+    setBooks(newBooks);
+  };
+
   return (
     <div>
-      <BookCreate />
-      <BookEdit />
-      <BookList />
+      <BookCreate handleCreateBook={handleCreateBook} />
     </div>
   );
 }
