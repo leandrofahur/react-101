@@ -1,17 +1,37 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 
-function BookShow(props) {
-  const { book, handleDeleteBookById } = props;
+import BookEdit from "components/BookEdit/BookEdit";
 
-  const handleOnClick = () => {
+function BookShow(props) {
+  const { book, handleDeleteBookById, handleEditBookById } = props;
+
+  const [showEdit, setShowEdit] = useState(false);
+
+  const handleOnDeleteClick = () => {
     handleDeleteBookById(book.id);
+  };
+
+  const handleOnEditClick = () => {
+    setShowEdit(!showEdit);
   };
 
   return (
     <div className="book-show">
-      {book.title}
+      {!showEdit ? (
+        book.title
+      ) : (
+        <BookEdit
+          book={book}
+          setShowEdit={setShowEdit}
+          handleEditBookById={handleEditBookById}
+        />
+      )}
       <div className="actions">
-        <button onClick={handleOnClick} className="delete">
+        <button onClick={handleOnEditClick} className="edit">
+          Edit
+        </button>
+        <button onClick={handleOnDeleteClick} className="delete">
           Delete
         </button>
       </div>
@@ -22,6 +42,7 @@ function BookShow(props) {
 BookShow.propTypes = {
   book: PropTypes.object.isRequired,
   handleDeleteBookById: PropTypes.func.isRequired,
+  handleEditBookById: PropTypes.func.isRequired,
 };
 
 export default BookShow;

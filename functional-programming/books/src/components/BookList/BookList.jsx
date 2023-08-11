@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import BookShow from "components/BookShow/BookShow";
 
 function BookList(props) {
-  const { books, handleDeleteBookById } = props;
+  const { books, handleDeleteBookById, handleEditBookById } = props;
 
   const renderedBooks = books.map((book) => {
     return (
@@ -11,6 +11,7 @@ function BookList(props) {
         key={book.id}
         book={book}
         handleDeleteBookById={handleDeleteBookById}
+        handleEditBookById={handleEditBookById}
       />
     );
   });
@@ -25,6 +26,7 @@ function BookList(props) {
 BookList.propTypes = {
   books: PropTypes.array.isRequired,
   handleDeleteBookById: PropTypes.func.isRequired,
+  handleEditBookById: PropTypes.func.isRequired,
 };
 
 BookList.defaultProps = {};
