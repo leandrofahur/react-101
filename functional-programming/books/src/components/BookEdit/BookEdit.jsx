@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 
 function BookEdit(props) {
-  const { book, setShowEdit, handleEditBookById } = props;
+  const { book, handleOnSubmit } = props;
 
   const [title, setTitle] = useState(book.title);
 
@@ -10,14 +10,13 @@ function BookEdit(props) {
     setTitle(event.target.value);
   };
 
-  const handleOnSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    handleEditBookById(book.id, title);
-    setShowEdit(false);
+    handleOnSubmit(book.id, title);
   };
 
   return (
-    <form className="book-edit" onSubmit={handleOnSubmit}>
+    <form className="book-edit" onSubmit={handleSubmit}>
       <label>Title</label>
       <input
         type="text"
@@ -34,8 +33,7 @@ function BookEdit(props) {
 
 BookEdit.propTypes = {
   book: PropTypes.object.isRequired,
-  setShowEdit: PropTypes.func.isRequired,
-  handleEditBookById: PropTypes.func.isRequired,
+  handleOnSubmit: PropTypes.func.isRequired,
 };
 
 BookEdit.defaultProps = {};

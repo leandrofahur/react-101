@@ -16,16 +16,17 @@ function BookShow(props) {
     setShowEdit(!showEdit);
   };
 
+  const handleOnSubmit = (id, newTitle) => {
+    handleEditBookById(id, newTitle);
+    setShowEdit(false);
+  };
+
   return (
     <div className="book-show">
       {!showEdit ? (
         book.title
       ) : (
-        <BookEdit
-          book={book}
-          setShowEdit={setShowEdit}
-          handleEditBookById={handleEditBookById}
-        />
+        <BookEdit book={book} handleOnSubmit={handleOnSubmit} />
       )}
       <div className="actions">
         <button onClick={handleOnEditClick} className="edit">
