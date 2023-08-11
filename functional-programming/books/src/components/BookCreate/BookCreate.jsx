@@ -38,6 +38,6 @@ BookCreate.propTypes = {
   handleCreateBook: PropTypes.func.isRequired,
 };
 
-// BookCreate.defaultProps = {};
+BookCreate.defaultProps = {};
 
 export default BookCreate;
