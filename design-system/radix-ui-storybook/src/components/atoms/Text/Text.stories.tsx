@@ -2,7 +2,7 @@ import { StoryFn, Meta } from "@storybook/react";
 import Text from "./Text";
 
 export default {
-  title: "Components/Text", // Here, "Components/Text" is the path in the Storybook sidebar.
+  title: "Components/atoms/Text", // Here, "Components/atoms/Text" is the path in the Storybook sidebar.
   component: Text, // Linking the story to the actual Text component.
 } as Meta;
 
