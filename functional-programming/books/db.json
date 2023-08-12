@@ -1,3 +1,8 @@
 {
-  "books": []
+  "books": [
+    {
+      "title": "The Hobbit",
+      "id": 2
+    }
+  ]
 }
