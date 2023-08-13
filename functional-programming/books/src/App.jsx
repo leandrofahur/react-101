@@ -8,6 +8,7 @@ import axios from "axios";
 function App() {
   const [books, setBooks] = useState([]);
 
+  // fetch data from the server when the component mounts
   useEffect(() => {
     const getBooks = async () => {
       const response = await axios.get("http://localhost:3001/books");
@@ -29,6 +30,8 @@ function App() {
   };
 
   const handleDeleteBookById = (id) => {
+    axios.delete(`http://localhost:3001/books/${id}`);
+
     const newBooks = books.filter((book) => {
       return book.id !== id;
     });
@@ -36,12 +39,17 @@ function App() {
     setBooks(newBooks);
   };
 
-  const handleEditBookById = (id, title) => {
+  const handleEditBookById = async (id, title) => {
+    const response = await axios.put(`http://localhost:3001/books/${id}`, {
+      title,
+    });
+
+    const updatedBook = response.data;
     const newBooks = books.map((book) => {
       if (book.id === id) {
         return {
           ...book,
-          title,
+          ...updatedBook, // garantee that ALL THE PROPERTIES of the book are updated
         };
       }
 
