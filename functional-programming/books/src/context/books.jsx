@@ -1,16 +1,20 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import PropsTypes from "prop-types";
 
 import axios from "axios";
 
-const BooksContext = createContext();
+export const BooksContext = createContext();
 
-function Provider({ children }) {
+export function Provider({ children }) {
   const [books, setBooks] = useState([]);
+
+  // useEffect(() => {
+  //   console.log("Current books:", books);
+  // }, [books]);
 
   const getBooks = async () => {
     const response = await axios.get("http://localhost:3001/books");
-
+    console.log("response.data", response.data);
     setBooks(response.data);
   };
 
@@ -57,6 +61,7 @@ function Provider({ children }) {
   return (
     <BooksContext.Provider
       value={{
+        books,
         getBooks,
         handleCreateBook,
         handleDeleteBookById,
@@ -71,6 +76,3 @@ function Provider({ children }) {
 Provider.propTypes = {
   children: PropsTypes.node.isRequired,
 };
-
-export { Provider };
-export default BooksContext;

@@ -1,10 +1,9 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
+import { useState, useContext } from "react";
+import { BooksContext } from "../../context/books";
 
-function BookCreate(props) {
-  const { handleCreateBook } = props;
-
+function BookCreate() {
   const [title, setTitle] = useState("");
+  const { handleCreateBook } = useContext(BooksContext);
 
   const handleOnChange = (event) => {
     setTitle(event.target.value);
@@ -33,11 +32,5 @@ function BookCreate(props) {
     </div>
   );
 }
-
-BookCreate.propTypes = {
-  handleCreateBook: PropTypes.func.isRequired,
-};
-
-BookCreate.defaultProps = {};
 
 export default BookCreate;

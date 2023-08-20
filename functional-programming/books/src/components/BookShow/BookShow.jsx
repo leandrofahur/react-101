@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import PropTypes from "prop-types";
 
 import BookEdit from "components/BookEdit/BookEdit";
+import { BooksContext } from "../../context/books";
 
 function BookShow(props) {
-  const { book, handleDeleteBookById, handleEditBookById } = props;
+  const { book } = props;
 
   const [showEdit, setShowEdit] = useState(false);
+
+  const { handleDeleteBookById, handleEditBookById } = useContext(BooksContext);
 
   const handleOnDeleteClick = () => {
     handleDeleteBookById(book.id);
@@ -43,8 +46,6 @@ function BookShow(props) {
 
 BookShow.propTypes = {
   book: PropTypes.object.isRequired,
-  handleDeleteBookById: PropTypes.func.isRequired,
-  handleEditBookById: PropTypes.func.isRequired,
 };
 
 export default BookShow;

@@ -1,34 +1,20 @@
-import PropTypes from "prop-types";
+import { useContext } from "react";
 
 import BookShow from "components/BookShow/BookShow";
+import { BooksContext } from "../../context/books";
 
-function BookList(props) {
-  const { books, handleDeleteBookById, handleEditBookById } = props;
+function BookList() {
+  const { books } = useContext(BooksContext);
 
-  const renderedBooks = books.map((book) => {
-    return (
-      <BookShow
-        key={book.id}
-        book={book}
-        handleDeleteBookById={handleDeleteBookById}
-        handleEditBookById={handleEditBookById}
-      />
-    );
+  const renderedBooks = books?.map((book) => {
+    return <BookShow key={book.id} book={book} />;
   });
 
-  if (books.length === 0) {
+  if (!books) {
     return <div className="book-list">There are no books</div>;
   }
 
   return <div className="book-list">{renderedBooks}</div>;
 }
-
-BookList.propTypes = {
-  books: PropTypes.array.isRequired,
-  handleDeleteBookById: PropTypes.func.isRequired,
-  handleEditBookById: PropTypes.func.isRequired,
-};
-
-BookList.defaultProps = {};
 
 export default BookList;
