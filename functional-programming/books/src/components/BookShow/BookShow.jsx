@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import PropTypes from "prop-types";
 
 import BookEdit from "components/BookEdit/BookEdit";
-import { BooksContext } from "../../context/books";
+import { BooksContext } from "context/books";
 
 function BookShow(props) {
   const { book } = props;

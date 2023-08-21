@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import PropsTypes from "prop-types";
 
 import axios from "axios";
@@ -8,13 +8,8 @@ export const BooksContext = createContext();
 export function Provider({ children }) {
   const [books, setBooks] = useState([]);
 
-  // useEffect(() => {
-  //   console.log("Current books:", books);
-  // }, [books]);
-
   const getBooks = async () => {
     const response = await axios.get("http://localhost:3001/books");
-    console.log("response.data", response.data);
     setBooks(response.data);
   };
 

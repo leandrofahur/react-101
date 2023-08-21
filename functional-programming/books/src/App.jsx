@@ -3,7 +3,7 @@ import { useEffect, useContext } from "react";
 import BookCreate from "components/BookCreate/BookCreate";
 import BookList from "components/BookList/BookList";
 
-import { BooksContext } from "./context/books";
+import { BooksContext } from "context/books";
 
 function App() {
   const { getBooks } = useContext(BooksContext);
