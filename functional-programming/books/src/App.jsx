@@ -1,13 +1,12 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 
 import BookCreate from "components/BookCreate/BookCreate";
 import BookList from "components/BookList/BookList";
 
-import { BooksContext } from "context/books";
+import useBooksContext from "hooks/useBooksContext";
 
 function App() {
-  const { getBooks } = useContext(BooksContext);
-
+  const { getBooks } = useBooksContext();
   // fetch data from the server when the component mounts
   useEffect(() => {
     getBooks();
