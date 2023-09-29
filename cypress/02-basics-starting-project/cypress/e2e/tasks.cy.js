@@ -6,8 +6,7 @@ describe("tasks management", () => {
     cy.contains("Add Task").click();
     cy.get(".modal").should("be.visible");
     cy.get(".backdrop").click({ force: true });
-
-    // cy.contains("Cancel").click();
-    // cy.get(".modal").should("not.be.visible");
+    cy.get(".backdrop").should("not.exist");
+    cy.get(".modal").should("not.exist");
   });
 });
