@@ -2,7 +2,7 @@ import Button from "./components/Button/Button";
 
 function App() {
   return (
-    <div>
+    <div className="bg-slate-900 text-white w-screen-xl h-screen p-8">
       <h1>Hello World</h1>
       <div>
         <Button primary>Primary</Button>
