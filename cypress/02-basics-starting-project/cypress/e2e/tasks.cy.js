@@ -52,5 +52,9 @@ describe("tasks management", () => {
     cy.get(".task").should("have.have.length", 1);
     cy.get("#filter").select("urgent");
     cy.get(".task").should("have.have.length", 0);
+    cy.get("#filter").select("important");
+    cy.get(".task").should("have.have.length", 1);
+    cy.get("#filter").select("all");
+    cy.get(".task").should("have.have.length", 1);
   });
 });
