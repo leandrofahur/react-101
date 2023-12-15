@@ -5,13 +5,29 @@ import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcept/CoreConcept.jsx";
 import TabButton from "./components/TabButton/TabButton.jsx";
 
-import { CORE_CONCEPTS } from "./data";
+import { CORE_CONCEPTS, EXAMPLES } from "./data";
 
 function App() {
-  const [selectedTopic, setSelectedTopic] = useState("Please click a button.");
+  const [selectedTopic, setSelectedTopic] = useState(null);
 
   function handleOnClick(selectedButton) {
     setSelectedTopic(selectedButton);
+  }
+
+  function renderSelectedTopic() {
+    if (!selectedTopic) {
+      return <p>Please, select a topic.</p>;
+    }
+
+    return (
+      <div id="tab-content">
+        <h3>{EXAMPLES[selectedTopic].title}</h3>
+        <p>{EXAMPLES[selectedTopic].description}</p>
+        <pre>
+          <code>{EXAMPLES[selectedTopic].code}</code>
+        </pre>
+      </div>
+    );
   }
 
   return (
@@ -29,14 +45,14 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButton onClick={() => handleOnClick("Components")}>
+            <TabButton onClick={() => handleOnClick("components")}>
               Components
             </TabButton>
-            <TabButton onClick={() => handleOnClick("JSX")}>JSX</TabButton>
-            <TabButton onClick={() => handleOnClick("Props")}>Props</TabButton>
-            <TabButton onClick={() => handleOnClick("State")}>State</TabButton>
+            <TabButton onClick={() => handleOnClick("jsx")}>JSX</TabButton>
+            <TabButton onClick={() => handleOnClick("props")}>Props</TabButton>
+            <TabButton onClick={() => handleOnClick("state")}>State</TabButton>
           </menu>
-          {selectedTopic}
+          {renderSelectedTopic()}
         </section>
       </main>
     </div>
