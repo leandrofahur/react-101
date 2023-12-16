@@ -2,6 +2,7 @@ import { useState } from "react";
 
 // Customized components:
 import Section from "../Section/Section.jsx";
+import Tabs from "../Tabs/Tabs.jsx";
 import TabButton from "../TabButton/TabButton.jsx";
 import { EXAMPLES } from "../../data.js";
 
@@ -30,33 +31,38 @@ export default function Examples() {
 
   return (
     <Section title="Examples" id="examples">
-      <menu>
-        <TabButton
-          isSelected={selectedTopic === "components"}
-          onClick={() => handleOnClick("components")}
-        >
-          Components
-        </TabButton>
-        <TabButton
-          isSelected={selectedTopic === "jsx"}
-          onClick={() => handleOnClick("jsx")}
-        >
-          JSX
-        </TabButton>
-        <TabButton
-          isSelected={selectedTopic === "props"}
-          onClick={() => handleOnClick("props")}
-        >
-          Props
-        </TabButton>
-        <TabButton
-          isSelected={selectedTopic === "state"}
-          onClick={() => handleOnClick("state")}
-        >
-          State
-        </TabButton>
-      </menu>
-      {renderSelectedTopic()}
+      <Tabs
+        buttons={
+          <>
+            <TabButton
+              isSelected={selectedTopic === "components"}
+              onClick={() => handleOnClick("components")}
+            >
+              Components
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "jsx"}
+              onClick={() => handleOnClick("jsx")}
+            >
+              JSX
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "props"}
+              onClick={() => handleOnClick("props")}
+            >
+              Props
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "state"}
+              onClick={() => handleOnClick("state")}
+            >
+              State
+            </TabButton>
+          </>
+        }
+      >
+        {renderSelectedTopic()}
+      </Tabs>
     </Section>
   );
 }
