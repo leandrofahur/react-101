@@ -1,8 +1,8 @@
 export default function Tabs(props) {
-  const { children, buttons } = props;
+  const { children, buttons, ButtonsContainer = "menu" } = props;
   return (
     <>
-      <menu>{buttons}</menu>
+      <ButtonsContainer>{buttons}</ButtonsContainer>
       {children}
     </>
   );
