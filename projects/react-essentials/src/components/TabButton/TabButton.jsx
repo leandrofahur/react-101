@@ -1,7 +1,7 @@
 import "./TabButton.css";
 
 export default function TabButton(props) {
-  const { onClick, children } = props;
+  const { onClick, isSelected, children } = props;
 
   function handleOnClick() {
     onClick();
@@ -9,7 +9,12 @@ export default function TabButton(props) {
 
   return (
     <li>
-      <button onClick={handleOnClick}>{children}</button>
+      <button
+        className={isSelected ? "active" : undefined}
+        onClick={handleOnClick}
+      >
+        {children}
+      </button>
     </li>
   );
 }
