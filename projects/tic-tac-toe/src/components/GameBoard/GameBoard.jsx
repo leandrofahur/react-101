@@ -1,26 +1,9 @@
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
 export default function GameBoard(props) {
-  const { onSelectSquare, turns } = props;
-
-  console.log(turns);
-
-  let gameBoard = initialGameBoard;
-
-  for (const turn of turns) {
-    const { player, square } = turn;
-    const { row, col } = square;
-
-    gameBoard[row][col] = player;
-  }
+  const { onSelectSquare, board } = props;
 
   return (
     <ol id="game-board">
-      {gameBoard.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
