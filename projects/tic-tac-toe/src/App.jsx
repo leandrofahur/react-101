@@ -35,6 +35,7 @@ function App() {
   for (const turn of gameTurns) {
     const { player, square } = turn;
     const { row, col } = square;
+    console.log("player", player);
 
     gameBoard[row][col] = player;
   }
