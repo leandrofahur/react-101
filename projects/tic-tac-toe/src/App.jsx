@@ -8,11 +8,17 @@ import GameOver from "./components/GameOver/GameOver";
 
 // Constants:
 import { WINNING_COMBINATIONS } from "./constants/winning-combinations";
-const initialGameBoard = [
+
+const INITIAL_GAME_BOARD = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
 ];
+
+const PLAYERS = {
+  X: "Player 1",
+  O: "Player 2",
+};
 
 // helper function to extract the derived state from the gameTurns.
 function deriveActivePlayer(gameTurns) {
@@ -27,7 +33,7 @@ function deriveActivePlayer(gameTurns) {
 
 // helper function to extract the derived gameBoard.
 function deriveGameBoard(gameTurns) {
-  const gameBoard = [...initialGameBoard.map((array) => [...array])];
+  const gameBoard = [...INITIAL_GAME_BOARD.map((array) => [...array])];
 
   for (const turn of gameTurns) {
     const { row, col } = turn.square;
@@ -59,10 +65,7 @@ function deriveWinner(gameBoard, players) {
 }
 
 function App() {
-  const [players, setPlayers] = useState({
-    X: "Player 1",
-    O: "Player 2",
-  });
+  const [players, setPlayers] = useState(PLAYERS);
 
   const [gameTurns, setGameTurns] = useState([]);
 
@@ -105,13 +108,13 @@ function App() {
       <div id="game-container">
         <ol id="players" className="highlight-player">
           <Player
-            name="Player 1"
+            name={players.X}
             symbol="X"
             isActive={activePlayer === "X"}
             handlePlayerNameChange={handlePlayerNameChange}
           />
           <Player
-            name="Player 2"
+            name={players.O}
             symbol="O"
             isActive={activePlayer === "O"}
             handlePlayerNameChange={handlePlayerNameChange}
