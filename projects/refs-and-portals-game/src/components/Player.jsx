@@ -6,7 +6,7 @@ export default function Player() {
 
   const handleOnClick = () => {
     setName(playerName.current.value);
-    playerName.current.value = ""; // very careful here! This is a imperative way of doing things. We should avoid it as much as possible.
+    playerName.current.value = ""; // very careful here! This is a imperative way of doing things.
   };
 
   return (
