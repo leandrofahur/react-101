@@ -26,6 +26,7 @@ export default function TimerChallenge(props) {
 
   return (
     <>
+      <ResultModal ref={dialog} result="lost" targetTime={targetTime} />
       <div className="challenge">
         <h2>{title}</h2>
 
@@ -41,7 +42,6 @@ export default function TimerChallenge(props) {
           {timerStarted ? "Time is runnning..." : "Timer inactive"}
         </p>
       </div>
-      <ResultModal ref={dialog} result="lost" targetTime={targetTime} />
     </>
   );
 }

@@ -1,7 +1,7 @@
-import { ForwardedRef } from "react";
+import { forwardRef } from "react";
 
-export default function ResultModal(props) {
-  const { result, targetTime, ref } = props;
+const ResultModal = forwardRef(function ResultModal(props, ref) {
+  const { result, targetTime } = props;
 
   return (
     <dialog ref={ref} className="result-modal">
@@ -17,4 +17,6 @@ export default function ResultModal(props) {
       </form>
     </dialog>
   );
-}
+});
+
+export default ResultModal;
