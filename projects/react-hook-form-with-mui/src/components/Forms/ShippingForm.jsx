@@ -11,10 +11,27 @@ import { COUNTRIES } from "../../constants/countries";
 import styles from "./ShippingForm.module.scss";
 
 export const ShippingForm = () => {
-  const { register, control, handleSubmit } = useForm();
+  const defaultValues = {
+    first_name: "",
+    last_name: "",
+    address: "",
+    unit: "",
+    city: "",
+    state: "",
+    zip_code: "",
+    country: null,
+  };
+
+  const { register, control, reset, handleSubmit } = useForm({
+    defaultValues,
+  });
 
   const onSubmitForm = (data) => {
     console.log(data);
+  };
+
+  const handleOnCancelSubmission = () => {
+    reset({ ...defaultValues, country: null });
   };
 
   return (
@@ -58,7 +75,6 @@ export const ShippingForm = () => {
               onChange={(event, item) => {
                 field.onChange(item);
               }}
-              disablePortal
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -69,9 +85,19 @@ export const ShippingForm = () => {
             />
           )}
         />
-        <Button variant="contained" type="submit">
-          Submit
-        </Button>
+        <Box className={styles.boxContainer}>
+          <Button variant="contained" type="submit" fullWidth>
+            Submit
+          </Button>
+          <Button
+            variant="outlined"
+            type="button"
+            fullWidth
+            onClick={handleOnCancelSubmission}
+          >
+            Cancel
+          </Button>
+        </Box>
       </Stack>
     </form>
   );
