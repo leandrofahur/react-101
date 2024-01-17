@@ -1,7 +1,7 @@
 import Button from "./Button";
 
 export default function ProjectsSidebar(props) {
-  const { onStartAddProject } = props;
+  const { onStartAddProject, projects } = props;
 
   return (
     <aside className="w-1/3 px-8 py-16 bg-stone-900 text-slate-50 md:w-72 rounded-r-xl">
@@ -11,7 +11,15 @@ export default function ProjectsSidebar(props) {
       <div>
         <Button onClick={onStartAddProject}>+ Add Project</Button>
       </div>
-      <ul></ul>
+      <ul>
+        {projects.map((project) => (
+          <li key={project.id}>
+            <button className="w-full py-2 text-left hover:bg-stone-800">
+              {project.title}
+            </button>
+          </li>
+        ))}
+      </ul>
     </aside>
   );
 }
