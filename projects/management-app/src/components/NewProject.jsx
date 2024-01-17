@@ -4,7 +4,7 @@ import Input from "./Input";
 import Modal from "./Modal";
 
 export default function NewProject(props) {
-  const { onAddProject } = props;
+  const { onAddProject, onCancelAddProject } = props;
   const modalRef = useRef();
 
   const titleRef = useRef();
@@ -43,7 +43,10 @@ export default function NewProject(props) {
       <div className="w-[35rem] mt-16">
         <menu className="flex items-center justify-end gap-4 my-4">
           <li>
-            <button className="text-stone-800 hover:text-stone-950">
+            <button
+              className="text-stone-800 hover:text-stone-950"
+              onClick={onCancelAddProject}
+            >
               Cancel
             </button>
           </li>
