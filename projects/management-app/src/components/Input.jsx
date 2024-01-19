@@ -11,7 +11,7 @@ const Input = forwardRef(function Input(props, ref) {
         {label}
       </label>
       {textArea ? (
-        <textArea ref={ref} className={classes} {...otherProps} />
+        <textarea ref={ref} className={classes} {...otherProps} />
       ) : (
         <input ref={ref} className={classes} {...otherProps} />
       )}
