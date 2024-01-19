@@ -1,3 +1,5 @@
+import Tasks from "./Tasks";
+
 export default function SelectedProject(props) {
   const { project, onDeleteProject } = props;
 
@@ -26,7 +28,7 @@ export default function SelectedProject(props) {
           {project.description}
         </p>
       </header>
-      TASKS
+      <Tasks />
     </div>
   );
 }
